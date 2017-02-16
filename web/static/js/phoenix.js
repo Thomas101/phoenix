@@ -784,9 +784,15 @@ export class Ajax {
   }
 
   static parseJSON(resp){
-    return (resp && resp !== "") ?
-             JSON.parse(resp) :
-             null
+    if (resp && resp !== "") {
+      try {
+        return JSON.parse(resp)
+      } catch (ex) {
+        return null
+      }
+    } else {
+      return null
+    }
   }
 
   static serialize(obj, parentKey){
